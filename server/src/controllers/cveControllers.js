@@ -1,15 +1,38 @@
 import CVE from "../models/cveModel.js";
 
-// Get all CVEs with pagination
+// Get all CVEs with pagination and sorting
 export const getAllCVEs = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const {
+    page = 1,
+    limit = 10,
+    sortField = "published",
+    sortOrder = "asc",
+  } = req.query;
+
+  console.log(`Sorting by: ${sortField} in ${sortOrder} order`);
+
   const skip = (page - 1) * parseInt(limit);
+  const sortOptions = { [sortField]: sortOrder === "asc" ? 1 : -1 };
 
   try {
     const totalRecords = await CVE.countDocuments();
-    const cves = await CVE.find().skip(skip).limit(parseInt(limit));
+    const cves = await CVE.find()
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(parseInt(limit));
+
+    console.log(
+      "Sorted Data:",
+      cves.map((cve) => ({
+        id: cve.id,
+        published: cve.published,
+        modified: cve.lastModified,
+      }))
+    );
+
     res.json({ totalRecords, cves });
   } catch (err) {
+    console.error("Error fetching CVEs:", err);
     res.status(500).json({ error: err.message });
   }
 };

@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getAllCVEs);
+router.get("/list", getAllCVEs);
 router.get("/:id", getCVEById);
 router.get("/year/:year", getCVEByYear);
 router.get("/lastmodified/:year", getCVEByLastModified);
