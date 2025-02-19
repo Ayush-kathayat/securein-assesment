@@ -104,7 +104,7 @@ The frontend is built using **React (Vite)** and provides a user-friendly interf
 - Fetches data dynamically based on the selected CVE ID.
 
 ## ✅ "Screenshot of the CVE Detail Page"
-![CVE Details Page](https://i.postimg.cc/GtbLJhnv/securein-2.png)
+![CVE Details Page](https://i.postimg.cc/HxdfkTcN/securein-2.png)
 
 ---
 

@@ -49,6 +49,52 @@ const CVEDetails = () => {
           </p>
         </>
       )}
+
+      {/* New Table for Access Vector, Complexity, etc. */}
+      {cve.metrics?.cvssMetricV2?.[0]?.cvssData && (
+        <>
+          <h3>Impact Metrics:</h3>
+          <table border="1" cellPadding="5" cellSpacing="0">
+            <thead>
+              <tr>
+                <th>Access Vector</th>
+                <th>Access Complexity</th>
+                <th>Authentication</th>
+                <th>Confidentiality Impact</th>
+                <th>Integrity Impact</th>
+                <th>Availability Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.accessVector || "N/A"}
+                </td>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.accessComplexity ||
+                    "N/A"}
+                </td>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.authentication || "N/A"}
+                </td>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.confidentialityImpact ||
+                    "N/A"}
+                </td>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.integrityImpact ||
+                    "N/A"}
+                </td>
+                <td>
+                  {cve.metrics.cvssMetricV2[0].cvssData.availabilityImpact ||
+                    "N/A"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
+
       <h3>Scores:</h3>
       {cve.metrics?.cvssMetricV2?.[0] && (
         <>
@@ -62,6 +108,7 @@ const CVEDetails = () => {
           </p>
         </>
       )}
+
       <h3>CPE:</h3>
       <table border="1" cellPadding="5" cellSpacing="0">
         <thead>
